@@ -1,0 +1,18 @@
+<script type="text/x-handlebars" data-template-name='_navigation'>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Ember National Park</a>
+      <div class="nav-collapse">
+        <ul class="nav navbar-nav">
+          {{#linkTo "index" tagName="li"}}<a href="#">Home</a>{{/linkTo}}
+          {{#linkTo "about" tagName="li"}}<a href="#">About</a>{{/linkTo}}
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</script>

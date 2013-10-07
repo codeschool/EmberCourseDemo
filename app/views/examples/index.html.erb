@@ -1,0 +1,12 @@
+<div class='container'>
+  <h1>Examples</h1>
+
+  <ul class="list-unstyled">
+    <% @examples.each do |example| %>
+      <li>
+        <h3><%= link_to "#{example.level}.#{example.number} - #{example.title}", example %></h3>
+        <%= raw example.details %>
+      </li>
+    <% end %>
+  </ul>
+</div>

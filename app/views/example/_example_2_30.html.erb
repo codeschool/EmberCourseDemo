@@ -31,6 +31,7 @@
 <script type='text/javascript'>
   App = Ember.Application.create();
   App.Router.map(function() {
-    this.route('about');
+    this.route('index', { path: '/home' });
+    this.route('about', { path: '' });
   });
 </script>

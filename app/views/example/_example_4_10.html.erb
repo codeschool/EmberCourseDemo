@@ -1,0 +1,76 @@
+<script type="text/x-handlebars" data-template-name='application'>
+  {{ partial 'navigation' }}
+  <div class="container">
+    {{outlet}}
+    <hr>
+    {{ partial 'footer' }}
+  </div>
+</script>
+
+<%= render partial: 'templates/navigation2' %>
+<%= render partial: 'templates/footer' %>
+<%= render partial: 'templates/index' %>
+<%= render partial: 'templates/about' %>
+
+
+<script type="text/x-handlebars" data-template-name='products'>
+<h1>Products - {{model.length}}</h1>
+
+{{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name='products/index'>
+<ul>
+{{#each}}
+  <li>{{#link-to 'product' this}}{{title}}{{/link-to}}</li>
+{{/each}}
+</ul>
+</script>
+
+<script type="text/x-handlebars" data-template-name='product'>
+<h1>Product Page: {{title}}</h1>
+</script>
+
+<script type='text/javascript'>
+  var App = Ember.Application.create();
+  App.Router.map(function() {
+    this.route('about');
+    this.resource('products', function() {
+      this.resource('product', { path: '/:product_id'});
+    });
+  });
+
+  App.ProductsRoute = Ember.Route.extend({
+    model: function() {
+      return this.store.find('product');
+    }
+  });
+
+  App.ProductsIndexRoute = Ember.Route.extend({
+    model: function() {
+      return this.store.find('product');
+    }
+  });
+
+
+  App.ApplicationAdapter = DS.FixtureAdapter.extend();
+  var attr = DS.attr;
+  App.Product = DS.Model.extend({
+    title: DS.attr()
+  });
+  App.Product.FIXTURES = [
+    {
+      id: 1,
+      title: 'Acorn'
+    },
+    {
+      id: 2,
+      title: 'Blackberry'
+    },
+    {
+      id: 3,
+      title: 'Pinecone'
+    },
+  ]
+
+</script>

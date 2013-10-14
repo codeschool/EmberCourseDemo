@@ -1,0 +1,51 @@
+<script type="text/x-handlebars" data-template-name='application'>
+  {{ partial 'navigation' }}
+  <div class="container">
+    {{outlet}}
+    <hr>
+    {{ partial 'footer' }}
+  </div>
+</script>
+
+<%= render partial: 'templates/navigation2' %>
+<%= render partial: 'templates/footer' %>
+<%= render partial: 'templates/index' %>
+<%= render partial: 'templates/about' %>
+
+
+<script type="text/x-handlebars" data-template-name='products'>
+<h1>Products</h1>
+<ul>
+{{#each}}
+  <li>{{#link-to 'product' this}}{{this}}{{/link-to}}</li>
+{{/each}}
+</ul>
+
+{{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name='product'>
+<h1>Product Page: {{model}}</h1>
+</script>
+
+<script type='text/javascript'>
+  var App = Ember.Application.create();
+  App.Router.map(function() {
+    this.route('about');
+    this.resource('products', function() {
+      this.resource('product', { path: '/:product_id'});
+    });
+  });
+
+  App.ProductsRoute = Ember.Route.extend({
+    model: function() {
+      return ['Acorns', 'Blackberries', 'Pinecones'];
+    }
+  });
+
+  App.ProductRoute = Ember.Route.extend({
+    model: function(params) {
+      return params.product_id;
+    }
+  });
+</script>

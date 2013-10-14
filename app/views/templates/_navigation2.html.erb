@@ -1,4 +1,4 @@
-<script type="text/x-handlebars" data-template-name='application'>
+<script type="text/x-handlebars" data-template-name='_navigation'>
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
@@ -9,24 +9,11 @@
       <a class="navbar-brand" href="#">Ember National Park</a>
       <div class="nav-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
+          {{#linkTo "index" tagName="li"}}<a href="#">Home</a>{{/linkTo}}
+          {{#linkTo "about" tagName="li"}}<a href="#">About</a>{{/linkTo}}
+          {{#linkTo "products" tagName="li"}}<a href="#">Store</a>{{/linkTo}}
         </ul>
       </div>
     </div>
   </div>
-
-  <div class="container">
-    {{outlet}}
-    <hr>
-    <footer>
-      <p>&copy; Company 2013</p>
-    </footer>
-  </div> <!-- /container -->
-</script>
-
-<%= render partial: 'templates/index' %>
-
-<script type='text/javascript'>
-  var App = Ember.Application.create();
 </script>

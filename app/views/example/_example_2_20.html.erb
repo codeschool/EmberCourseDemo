@@ -9,8 +9,8 @@
       <a class="navbar-brand" href="#">Ember National Park</a>
       <div class="nav-collapse">
         <ul class="nav navbar-nav">
-          <li>{{#linkTo 'index'}}Home{{/linkTo}}</li>
-          <li>{{#linkTo 'about'}}About{{/linkTo}}</li>
+          {{#link-to "index" tagName="li"}}<a href="#">Home</a>{{/link-to}}
+          {{#link-to "about" tagName="li"}}<a href="#">About</a>{{/link-to}}
         </ul>
       </div>
     </div>

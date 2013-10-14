@@ -8,7 +8,9 @@ class ExamplesController < ApplicationController
   end
 
   def show
-    @example = Example.find params[:id]
+    level = params[:id].split("-").first
+    number = params[:id].split("-").last
+    @example = Example.find_by number: number, level: level
   end
 
   private

@@ -9,8 +9,8 @@
       <a class="navbar-brand" href="#">Ember National Park</a>
       <div class="nav-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#about">About</a></li>
+          <li>{{#link-to 'index'}}Home{{/link-to}}</li>
+          <li>{{#link-to 'about'}}About{{/link-to}}</li>
         </ul>
       </div>
     </div>
@@ -26,7 +26,11 @@
 </script>
 
 <%= render partial: 'templates/index' %>
+<%= render partial: 'templates/about' %>
 
 <script type='text/javascript'>
-  var App = Ember.Application.create();
+  App = Ember.Application.create();
+  App.Router.map(function() {
+    this.route('about');
+  });
 </script>

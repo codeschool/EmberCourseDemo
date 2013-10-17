@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>The Burrow &amp; Berry</title>
+  <link href="bootstrap.css" media="screen" rel="stylesheet" />
+  <link href="application.css" media="screen" rel="stylesheet" />
+  <script src="jquery.js"></script>
+  <script src="handlebars-1.0.0.js"></script>
+  <script src="ember-1.0.0.js"></script>
+  <script src="ember-data.js"></script>
+  <script src="application.js"></script>
+</head>
+<body>
+
+<script type="text/x-handlebars" data-template-name='application'>
+  <div class="navbar navbar-default">
+    <div class="container">
+      <a class="navbar-brand" href="#">The Burrow &amp; Berry</a>
+      <ul class="nav navbar-nav navbar-right">
+        {{#link-to "index" tagName="li"}}<a href="#">Home</a>{{/link-to}}
+        {{#link-to "contacts" tagName="li"}}<a href="#">About</a>{{/link-to}}
+        {{#link-to "products" tagName="li"}}<a href="#">Store</a>{{/link-to}}
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    {{outlet}}
+  </div>
+
+  <footer class='container'>
+    <hr />
+    <p class='pull-left'>&copy; 2013 The Burrow &amp; Berry</p>
+    <p class='pull-right'>{{#link-to 'credits'}}Credits{{/link-to}}</p>
+  </footer>
+</script>
+
+<script type="text/x-handlebars" data-template-name="index">
+  <div class="jumbotron">
+    <h1>Welcome to The Burrow & Berry!</h1>
+    <p>Everything you need to make it through the winter.</p>
+    <p>{{#link-to 'products' classNames='btn btn-primary btn-lg'}}Browse All {{productCount}} Items &raquo;{{/link-to}}</p>
+  </div>
+
+  <div class="body-content">
+    <div class="row">
+      {{#each product in onSale }}
+        {{product-detail product=product classNames="col-md-4"}}
+      {{/each}}
+    </div>
+  </div>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name='products'>
+<div class='row'>
+  <div class='col-md-2'>
+    <div class="list-group">
+      {{#each}}
+        {{#link-to 'product' this classNames="list-group-item"}}
+          {{title}}
+        {{/link-to}}
+      {{/each}}
+    </div>
+
+    <h3>Filter</h3>
+    <div class="list-group">
+      {{#link-to 'products.sale' classNames="list-group-item"}}
+        <span class="badge">{{onSale}}</span> On Sale
+      {{/link-to}}
+      {{#link-to 'products.seasonal' classNames="list-group-item"}}
+        <span class="badge">{{seasonal}}</span> Seasonal
+      {{/link-to}}
+    </div>
+  </div>
+  <div class='col-md-9'>
+    {{outlet}}
+  </div>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name='products/index'>
+<ol class="breadcrumb">
+  <li class="active">Products</li>
+</ol>
+<span class='lead'>If you can't find it here, it doesn't exist!</span>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name='products/seasonal'>
+<h2>Seasonal Items</h2>
+<ol class="breadcrumb">
+  <li>{{#link-to 'products' }}Store{{/link-to}}</li>
+  <li class="active">Seasonal</li>
+</ol>
+<ul class='list-unstyled'>
+  {{#each}}
+    {{product-detail product=this tagName='li' classNames='row'}}
+  {{/each}}
+</ul>
+</script>
+
+<script type="text/x-handlebars" data-template-name='products/sale'>
+<h2>On Sale Items</h2>
+<ol class="breadcrumb">
+  <li>{{#link-to 'products' }}Store{{/link-to}}</li>
+  <li class="active">On Sale</li>
+</ol>
+<ul class='list-unstyled'>
+  {{#each}}
+    {{product-detail product=this tagName='li' classNames='row'}}
+  {{/each}}
+</ul>
+</script>
+
+<script type="text/x-handlebars" data-template-name='components/product-detail'>
+<img {{bind-attr src='product.image'}} class='img-thumbnail col-md-5'/>
+<div class='col-md-7'>
+  <h2>{{product.title}}</h2>
+
+  {{#if product.isOnSale }}<span class="label label-success">{{#link-to 'products.sale'}}On Sale{{/link-to}}</span>{{/if}}
+  {{#if product.isSeasonal }}<span class="label label-warning">{{#link-to 'products.seasonal'}}Seasonal{{/link-to}}</span>{{/if}}
+
+  <p>{{product.description}}</p>
+  <p>{{#link-to 'product' product classNames='btn btn-primary'}}Buy for ${{product.price}}{{/link-to}}</p>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name='product'>
+  <ol class="breadcrumb">
+    <li>{{#link-to 'products' }}Store{{/link-to}}</li>
+    <li class="active">{{title}}</li>
+  </ol>
+
+  <h2>{{title}}</h2>
+  <p>{{price}}</p>
+  <p>{{description}}</p>
+  {{#if hasRatings}}<p>Rating: {{rating}}</p>{{/if}}
+  <p><img {{bind-attr src="image"}} /></p>
+  {{#if isUnrated}}
+  <p>
+    Rate this Product!
+    <ul>
+      <li><button class='btn' {{action 'addRating' this 1}}>1</button></li>
+      <li><button class='btn' {{action 'addRating' this 2}}>2</button></li>
+      <li><button class='btn' {{action 'addRating' this 3}}>3</button></li>
+      <li><button class='btn' {{action 'addRating' this 4}}>4</button></li>
+      <li><button class='btn' {{action 'addRating' this 5}}>5</button></li>
+    </ul>
+  </p>
+  {{/if}}
+</script>
+
+<script type="text/x-handlebars" data-template-name='about'>
+  <h1>About</h1>
+</script>
+
+<script type="text/x-handlebars" data-template-name='contacts'>
+  <div class='row'>
+  <div class='col-md-2'>
+    <div class="list-group">
+      {{#each}}
+        {{#link-to 'contact' this classNames="list-group-item"}}
+          {{name}}
+        {{/link-to}}
+      {{/each}}
+    </div>
+  </div>
+  <div class='col-md-10'>
+    {{outlet}}
+  </div>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name='contacts/index'>
+  <h1>About</h1>
+  <p>The Burrow &amp Berry is made possible due to the effors of these brave chimpmunk theives.</p>
+  <p>Need to writeup something related to the theme here</p>
+</script>
+
+<script type="text/x-handlebars" data-template-name='contact'>
+  <img {{bind-attr src="avatar"}} class='pull-left' />
+  <h2>{{name}}</h2>
+  <p>Joined: {{joined}}</p>
+  <p>{{description}}</p>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name='credits'>
+  <h2>Credits</h2>
+  <ul>
+    <li></li>
+  </ul>
+</script>
+</body>
+</html>

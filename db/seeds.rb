@@ -46,6 +46,17 @@ Example.delete_all
       Splitting out the header to a `partial`.
     HTML
   },
+  # 2-3: Controllers
+  { title: "Controller Basics", level: 2, number: 50, description: <<-HTML.strip_heredoc
+      Providing data for a template.
+    HTML
+  },
+  { title: "Binding attributes and functions", level: 2, number: 60, description: <<-HTML.strip_heredoc
+      Binding attributes using `{{bind-attr}}`.
+
+      Using functions as properties.
+    HTML
+  },
 
 
   # 3-1: Routing
@@ -62,12 +73,16 @@ Example.delete_all
     HTML
   },
 
-
+  # 3-3: Nested Resource Routes
   { title: "Resource Routes", level: 3, number: 20, description: <<-HTML.strip_heredoc
       Difference between regular routes and resource routes.
     HTML
   },
-  { title: "Index Resource Routes", level: 3, number: 30, description: <<-HTML.strip_heredoc
+  { title: "Using Outlet within nested routes", level: 3, number: 30, description: <<-HTML.strip_heredoc
+      Using `{{outlet}}` and introducting the `index` template.
+    HTML
+  },
+  { title: "Index Resource Routes", level: 3, number: 25, description: <<-HTML.strip_heredoc
       Using an `index` template within a resource.
     HTML
   },
@@ -83,10 +98,6 @@ Example.delete_all
       Creating a `Model` with a string attribute.
 
       Updating Routes to use the new data store to fetch objects.
-    HTML
-  },
-  { title: "The Code Note Written", level: 4, number: 20, description: <<-HTML.strip_heredoc
-      
     HTML
   }
 ].each do |example_hash| 

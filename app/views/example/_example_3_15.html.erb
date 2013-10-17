@@ -36,8 +36,8 @@
   var App = Ember.Application.create();
   App.Router.map(function() {
     this.route('about');
-    this.route('products');
-    this.resource('product', { path: '/:product_id'});
+    this.resource('products');
+    this.resource('product', { path: '/products/:product_id'});
   });
 
   var PRODUCTS = [
@@ -72,14 +72,7 @@
 
   App.ProductRoute = Ember.Route.extend({
     model: function(params) {
-      var foundProduct = {};
-      $.each(PRODUCTS, function() {
-        if(this.title == params.product_id) { 
-          foundProduct = this;
-          return true;
-        }
-      });
-      return foundProduct;
+      return PRODUCTS.findProperty('title', params.product_id);
     }
   });
 </script>

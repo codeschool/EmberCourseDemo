@@ -16,9 +16,9 @@
 <script type="text/x-handlebars" data-template-name='application'>
   <div class="navbar navbar-default">
     <div class="container">
-      <a class="navbar-brand" href="#">The Burrow &amp; Berry</a>
+      {{#link-to "index" class="navbar-brand"}}The Burrow &amp; Berry{{/link-to}}
       <ul class="nav navbar-nav navbar-right">
-        {{#link-to "index" tagName="li"}}<a href="#">Home</a>{{/link-to}}
+        {{#link-to "index" tagName="li"}}<a>Home</a>{{/link-to}}
         {{#link-to "contacts" tagName="li"}}<a href="#">About</a>{{/link-to}}
         {{#link-to "products" tagName="li"}}<a href="#">Store</a>{{/link-to}}
       </ul>

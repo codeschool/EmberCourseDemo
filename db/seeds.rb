@@ -41,12 +41,7 @@ Example.delete_all
       Changing the `index` route and specifying a `path` for routes.
     HTML
   },
-  # 2-2: Partials
-  { title: "Partial for the Header", level: 2, number: 40, description: <<-HTML.strip_heredoc
-      Splitting out the header to a `partial`.
-    HTML
-  },
-  # 2-3: Controllers
+  # 2-2: Controllers
   { title: "Controller Basics", level: 2, number: 50, description: <<-HTML.strip_heredoc
       Providing data for a template.
     HTML

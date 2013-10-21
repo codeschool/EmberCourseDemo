@@ -4,7 +4,9 @@
     <h1>Welcome to The Burrow &amp; Berry</h1>
     <p></p>
     <p><a class="btn btn-primary btn-large">See all {{productCount}} products &raquo;</a></p>
-    <img src="{{logo}}" />
+    <img {{bind-attr src='logo'}} />
+
+    <p>It's currently {{time}}</p>
   </div>
 
   <div class="body-content">

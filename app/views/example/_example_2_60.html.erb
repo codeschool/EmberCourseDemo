@@ -9,7 +9,7 @@
 
 <%= render partial: 'templates/navigation' %>
 <%= render partial: 'templates/footer' %>
-<%= render partial: 'templates/index2' %>
+<%= render partial: 'templates/index3' %>
 <%= render partial: 'templates/about' %>
 
 <script type='text/javascript'>
@@ -20,7 +20,7 @@
 
   App.IndexController = Ember.Controller.extend({
     logo: "/assets/logo.png",
-    siteName: "The Burrow & Berry",
+    productCount: 6,
     time: function() {
       return "The current time is " + (new Date()).toDateString()
     }.property()

@@ -2,21 +2,21 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>The Burrow &amp; Berry</title>
+  <title>The Flint &amp; Flame</title>
   <link href="bootstrap.css" media="screen" rel="stylesheet" />
   <link href="application.css" media="screen" rel="stylesheet" />
   <script src="jquery.js"></script>
   <script src="handlebars-1.0.0.js"></script>
   <script src="ember-1.0.0.js"></script>
   <script src="ember-data.js"></script>
-  <script src="application.js"></script>
+  <script src="app.js"></script>
 </head>
 <body>
 
 <script type="text/x-handlebars" data-template-name='application'>
   <div class="navbar navbar-default">
     <div class="container">
-      {{#link-to "index" class="navbar-brand"}}The Burrow &amp; Berry{{/link-to}}
+      {{#link-to "index" class="navbar-brand"}}The Flint &amp; Flame{{/link-to}}
       <ul class="nav navbar-nav navbar-right">
         {{#link-to "index" tagName="li"}}<a>Home</a>{{/link-to}}
         {{#link-to "contacts" tagName="li"}}<a href="#">About</a>{{/link-to}}
@@ -31,14 +31,14 @@
 
   <footer class='container'>
     <hr />
-    <p class='pull-left'>&copy; 2013 The Burrow &amp; Berry</p>
+    <p class='pull-left'>&copy; 2013 The Flint &amp; Flame</p>
     <p class='pull-right'>{{#link-to 'credits'}}Credits{{/link-to}}</p>
   </footer>
 </script>
 
 <script type="text/x-handlebars" data-template-name="index">
   <div class="jumbotron">
-    <h1>Welcome to The Burrow & Berry!</h1>
+    <h1>Welcome to The Flint &amp; Flame!</h1>
     <p>Everything you need to make it through the winter.</p>
     <p>{{#link-to 'products' classNames='btn btn-primary btn-lg'}}Browse All {{productCount}} Items &raquo;{{/link-to}}</p>
   </div>
@@ -152,10 +152,6 @@
   {{/if}}
 </script>
 
-<script type="text/x-handlebars" data-template-name='about'>
-  <h1>About</h1>
-</script>
-
 <script type="text/x-handlebars" data-template-name='contacts'>
   <div class='row'>
   <div class='col-md-2'>
@@ -189,8 +185,13 @@
 
 <script type="text/x-handlebars" data-template-name='credits'>
   <h2>Credits</h2>
+  <p>Here are a few of the technologies that make this site possible.
   <ul>
-    <li></li>
+    <li><a href='http://emberjs.com/'>Ember.js</a></li>
+    <li><a href='http://handlebarsjs.com/'>Handlebars.js</a></li>
+    <li><a href='https://github.com/emberjs/data'>Ember Data</a></li>
+    <li><a href='http://jquery.com/'>jQuery</a></li>
+    <li><a href='http://getbootstrap.com/'>Twitter Bootstrap</a></li>
   </ul>
 </script>
 </body>

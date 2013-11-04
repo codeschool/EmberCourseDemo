@@ -15,6 +15,10 @@ Example.delete_all
       Different ways of giving your view a name using `id` and `data-template-name`.
     HTML
   },
+  { title: "Rendering variables using Handlebars", level: 1, number: 35, description: <<-HTML.strip_heredoc
+      Using the `{{}}` syntax to render a variable.
+    HTML
+  },
   { title: "Index Path", level: 1, number: 40, description: <<-HTML.strip_heredoc
       Creating a new template and using `{{outlet}}`.
     HTML

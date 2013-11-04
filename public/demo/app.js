@@ -15,12 +15,12 @@ App.Router.map(function() {
   });
 });
 
-// if (window.history && window.history.pushState) {
-//   App.Router.reopen({
-//     location: 'history',
-//     rootURL: '/demo/index.html'
-//   });
-// }
+if (window.history && window.history.pushState) {
+  App.Router.reopen({
+    location: 'hash',
+    rootURL: '/demo/index.html'
+  });
+}
 
 
 // Index
@@ -70,7 +70,7 @@ App.ProductsController = Ember.ArrayController.extend({
   sortProperties: ['title'],
   count: function() {
     return this.get('length');
-  }.property('@each'),
+  }.property('length'),
 
   // Slides
   onSale: function() {

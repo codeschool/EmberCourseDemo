@@ -29,7 +29,9 @@
 <%= render partial: 'templates/about' %>
 
 <script type='text/javascript'>
-  App = Ember.Application.create();
+  App = Ember.Application.create({
+    LOG_TRANSITIONS: true
+  });
   App.Router.map(function() {
     // Don't need a route for index
     // this.route('index', { path: '' });

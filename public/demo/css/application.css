@@ -1,0 +1,34 @@
+.tagline {
+  margin-bottom: 20px;
+}
+
+.label a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.product-detail.row {
+  margin: 1em 0;
+  border-bottom: 1px solid #eee;
+}
+.product-detail img {
+  max-height: 150px;
+  max-width: 150px;
+}
+.product-detail h2 {
+  margin-top: 0;
+  margin-bottom: 0px;
+}
+.product-description {
+  margin-top: 10px;
+}
+
+.list-rating {
+  margin: 0;
+  padding: 0;
+}
+.list-rating li {
+  display: inline;
+  list-style-type: none;
+}
+

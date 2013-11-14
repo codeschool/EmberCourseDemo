@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>The Flint &amp; Flame</title>
-  <link href="bootstrap.css" media="screen" rel="stylesheet" />
-  <link href="application.css" media="screen" rel="stylesheet" />
+  <link href="css/bootstrap.css" media="screen" rel="stylesheet" />
+  <link href="css/application.css" media="screen" rel="stylesheet" />
   <script src="jquery.js"></script>
   <script src="handlebars-1.0.0.js"></script>
   <script src="ember-1.0.0.js"></script>
@@ -16,7 +16,7 @@
 <script type="text/x-handlebars" data-template-name='application'>
   <div class="navbar navbar-default">
     <div class="container">
-      {{#link-to "index" class="navbar-brand"}}The Flint &amp; Flame{{/link-to}}
+      {{#link-to "index" class="navbar-brand"}}<img src="images/flintfire-logo.png" alt="logo" height="34" width="224">{{/link-to}}
       <ul class="nav navbar-nav navbar-right">
         {{#link-to "index" tagName="li"}}<a>Home</a>{{/link-to}}
         {{#link-to "contacts" tagName="li"}}<a href="#">About</a>{{/link-to}}
@@ -39,7 +39,7 @@
 <script type="text/x-handlebars" data-template-name="index">
   <div class="jumbotron">
     <h1>Welcome to The Flint &amp; Flame!</h1>
-    <p>Everything you need to make it through the winter.</p>
+    <p class="tagline">Everything you need to make it through the winter.</p>
     <p>{{#link-to 'products' classNames='btn btn-primary btn-lg'}}Browse All {{productCount}} Items &raquo;{{/link-to}}</p>
   </div>
 
@@ -55,7 +55,7 @@
 
 <script type="text/x-handlebars" data-template-name='products'>
 <div class='row'>
-  <div class='col-md-2'>
+  <div class='col-md-3'>
     <div class="list-group">
       {{#each}}
         {{#link-to 'product' this classNames="list-group-item"}}
@@ -90,11 +90,11 @@
 
 
 <script type="text/x-handlebars" data-template-name='products/seasonal'>
-<h2>Seasonal Items</h2>
 <ol class="breadcrumb">
   <li>{{#link-to 'products' }}Store{{/link-to}}</li>
   <li class="active">Seasonal</li>
 </ol>
+<h2>Seasonal Items</h2>
 <ul class='list-unstyled'>
   {{#each}}
     {{product-detail product=this tagName='li' classNames='row'}}
@@ -103,11 +103,11 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name='products/sale'>
-<h2>On Sale Items</h2>
 <ol class="breadcrumb">
   <li>{{#link-to 'products' }}Store{{/link-to}}</li>
   <li class="active">On Sale</li>
 </ol>
+<h2>On Sale Items</h2>
 <ul class='list-unstyled'>
   {{#each}}
     {{product-detail product=this tagName='li' classNames='row'}}
@@ -120,11 +120,13 @@
 <div class='col-md-7'>
   <h2>{{product.title}}</h2>
 
-  {{#if product.isOnSale }}<span class="label label-success">{{#link-to 'products.sale'}}On Sale{{/link-to}}</span>{{/if}}
-  {{#if product.isSeasonal }}<span class="label label-warning">{{#link-to 'products.seasonal'}}Seasonal{{/link-to}}</span>{{/if}}
+  <div class="labels">
+    {{#if product.isOnSale }}<span class="label label-success">{{#link-to 'products.sale'}}On Sale{{/link-to}}</span>{{/if}}
+    {{#if product.isSeasonal }}<span class="label label-warning">{{#link-to 'products.seasonal'}}Seasonal{{/link-to}}</span>{{/if}}
+  </div>
 
-  <p>{{product.description}}</p>
-  <p>{{#link-to 'product' product classNames='btn btn-primary'}}Buy for ${{product.price}}{{/link-to}}</p>
+  <p class="product-description">{{product.description}}</p>
+  <p>{{#link-to 'product' product classNames='btn btn-success'}}Buy for ${{product.price}}{{/link-to}}</p>
 </div>
 </script>
 
@@ -135,19 +137,19 @@
   </ol>
 
   <h2>{{title}}</h2>
-  <p>{{price}}</p>
-  <p>{{description}}</p>
+  <h3 class="text-success">&#36;{{price}}</h3>
+  <p class="text-muted">{{description}}</p>
   {{#if hasRatings}}<p>Rating: {{rating}}</p>{{/if}}
   <p><img {{bind-attr src="image"}} /></p>
   {{#if isUnrated}}
   <p>
     Rate this Product!
-    <ul>
-      <li><button class='btn' {{action 'addRating' this 1}}>1</button></li>
-      <li><button class='btn' {{action 'addRating' this 2}}>2</button></li>
-      <li><button class='btn' {{action 'addRating' this 3}}>3</button></li>
-      <li><button class='btn' {{action 'addRating' this 4}}>4</button></li>
-      <li><button class='btn' {{action 'addRating' this 5}}>5</button></li>
+    <ul class="list-rating">
+      <li><button class='btn btn-primary' {{action 'addRating' this 1}}><span class="glyphicon glyphicon-star"></span></button></li>
+      <li><button class='btn btn-primary' {{action 'addRating' this 2}}><span class="glyphicon glyphicon-star"></span></button></li>
+      <li><button class='btn btn-primary' {{action 'addRating' this 3}}><span class="glyphicon glyphicon-star"></span></button></li>
+      <li><button class='btn btn-primary' {{action 'addRating' this 4}}><span class="glyphicon glyphicon-star"></span></button></li>
+      <li><button class='btn btn-primary' {{action 'addRating' this 5}}><span class="glyphicon glyphicon-star"></span></button></li>
     </ul>
   </p>
   {{/if}}

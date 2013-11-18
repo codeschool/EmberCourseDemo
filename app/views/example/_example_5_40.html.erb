@@ -1,0 +1,186 @@
+<script type="text/x-handlebars" data-template-name='application'>
+  {{ partial 'navigation' }}
+  <div class="container">
+    {{outlet}}
+    <hr>
+    {{ partial 'footer' }}
+  </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name="index">
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <h1>A Wonderously Diverse Framework Ecosystem</h1>
+    <p></p>
+    <p><a class="btn btn-primary btn-large">View all {{productsCount}} products &raquo;</a></p>
+  </div>
+
+  <div class="body-content">
+    <div class="row">
+      {{#each product in onSale }}
+        <img {{bind-attr src='product.image'}} class='img-thumbnail col-md-5'/>
+        <div class='col-md-7'>
+          <h2>{{product.title}}</h2>
+
+          <p>{{product.description}}</p>
+          <p>{{#link-to 'product' product classNames='btn btn-primary'}}Buy for ${{product.price}}{{/link-to}}</p>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</script>
+
+<script type="text/x-handlebars" data-template-name='products/onsale'>
+<h2>On Sale Items</h2>
+<ol class="breadcrumb">
+  <li>{{#link-to 'products' }}Store{{/link-to}}</li>
+  <li class="active">On Sale</li>
+</ol>
+<ul class='list-unstyled'>
+  {{#each}}
+    <img {{bind-attr src='image'}} class='img-thumbnail col-md-5'/>
+    <div class='col-md-7'>
+      <h2>{{title}}</h2>
+
+      <p>{{description}}</p>
+      <p>{{#link-to 'product' this classNames='btn btn-primary'}}Buy for ${{price}}{{/link-to}}</p>
+    </div>
+  {{/each}}
+</ul>
+</script>
+
+<%= render partial: 'templates/navigation2' %>
+<%= render partial: 'templates/footer' %>
+<%= render partial: 'templates/about' %>
+
+<script type="text/x-handlebars" data-template-name='products'>
+<h1>Products</h1>
+<ul>
+{{#each}}
+  <li>
+    <p>{{#link-to 'product' this classNames='btn btn-default'}}{{title}}{{/link-to}}</p>
+  </li>
+{{/each}}
+</ul>
+
+<h3>Filter</h3>
+<div class="list-group">
+  {{#link-to 'products.onsale' classNames="list-group-item"}}
+    On Sale
+  {{/link-to}}
+</div>
+
+{{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name='products/index'>
+<p>Choose from our {{model}} products!</p>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name='product'>
+<h1>{{title}}</h1>
+<p>{{description}}</p>
+<p>Buy for ${{price}}</p>
+</script>
+
+<script type='text/javascript'>
+  var App = Ember.Application.create();
+  App.Router.map(function() {
+    this.route('about');
+    this.resource('products', function() {
+      this.resource('product', { path: '/:product_id'});
+      this.route('onsale');
+    });
+  });
+
+  App.ProductsRoute = Ember.Route.extend({
+    model: function() {
+      return this.store.find('product');
+    }
+  });
+  App.ProductsOnsaleRoute = Ember.Route.extend({
+    model: function () {
+      //return this.store.find('product').filterProperty('isOnSale', true);
+      return this.modelFor('products').filterProperty('isOnSale', true);
+    }
+  });
+
+  App.ProductsController = Ember.ArrayController.extend({
+    sortProperties: ['title'],
+    sortAscending: true
+  });
+
+
+  App.IndexRoute = Ember.Route.extend({
+    model: function() {
+      return this.store.find('product');
+    }
+  });
+  App.IndexController = Ember.ArrayController.extend({
+    productCount: Ember.computed.alias('length'),
+    onSale: function() {
+      return this.filterProperty('isOnSale', true).slice(0,3);
+    }.property('@each.isOnSale')
+  });
+
+  App.ApplicationAdapter = DS.FixtureAdapter.extend();
+  var attr = DS.attr;
+  App.Product = DS.Model.extend({
+    title: DS.attr(),
+    price: DS.attr('number'),
+    description: DS.attr(),
+    isOnSale: DS.attr('boolean'),
+    isSeasonal: DS.attr('boolean')
+  });
+  App.Product.FIXTURES = [
+    {
+      id: 1,
+      title: 'Acorn',
+      price: '0.99',
+      description: 'These fell right out of the tree -- or were left unguarded.',
+      isOnSale: true,
+      isSeasonal: true
+    },
+    {
+      id: 2,
+      title: 'Pinecone',
+      price: '2.49',
+      description: 'A seasonal treat fresh from the pines.',
+      isOnSale: false,
+      isSeasonal: true
+    },
+    {
+      id: 3,
+      title: 'Blackberries',
+      price: '4.99',
+      description: 'Got a sweet tooth? They might be hard to get to, but worth the trouble!',
+      isOnSale: true,
+      isSeasonal: true
+    },
+    {
+      id: 4,
+      title: 'Peanuts',
+      price: '1.99',
+      description: 'Worth digging for, or ripped from a squirrels nest.',
+      isOnSale: false,
+      isSeasonal: false
+    },
+    {
+      id: 5,
+      title: 'Mushrooms',
+      price: '9.99',
+      description: 'Freshly grown due to recent rain!',
+      isOnSale: true,
+      isSeasonal: false
+    },
+    {
+      id: 6,
+      title: 'Eggs',
+      price: '19.99',
+      description: 'A rare and dangerous treat to come across.',
+      isOnSale: true,
+      isSeasonal: false
+    }
+  ]
+</script>

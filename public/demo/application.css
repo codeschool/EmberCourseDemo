@@ -1,0 +1,16 @@
+.label a { color: #fff; text-decoration: underline; }
+
+.product-detail.row {
+  margin: 1em 0;
+  border-bottom: 1px solid #eee;
+}
+.product-detail img {
+  max-height: 150px;
+  max-width: 150px;
+}
+.product-detail h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.nav li a { cursor: pointer; }

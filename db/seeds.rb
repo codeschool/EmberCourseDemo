@@ -98,7 +98,40 @@ Example.delete_all
 
       Updating Routes to use the new data store to fetch objects.
     HTML
+  },
+
+  # 5-1: Ember Data Controller features
+  { title: "Ember Controller Types ", level: 5, number: 10, description: <<-HTML.strip_heredoc
+      Sorting by a property in a Controller.
+    HTML
+  },
+  { title: "Computed Alias ", level: 5, number: 20, description: <<-HTML.strip_heredoc
+      Switching to an `Ember.computed.alias`.
+    HTML
+  },
+  { title: "Displaying Filtered Content", level: 5, number: 30, description: <<-HTML.strip_heredoc
+      Creating a controller property to provide an array.
+
+      Using `filterProperty` and limiting the result.
+
+      Binding a controller property to an attribute in an array.
+    HTML
+  },
+  { title: "Creating a nested route for products on sale", level: 5, number: 40, description: <<-HTML.strip_heredoc
+      Setting up a `route` nested in our products `resource`.
+    HTML
+  },
+
+  # 6-1: Ember Components
+  { title: "Ember Components", level: 6, number: 10, description: <<-HTML.strip_heredoc
+      Moving product details into a component.
+    HTML
+  },
+  { title: "Ember Views", level: 6, number: 20, description: <<-HTML.strip_heredoc
+      Adding functionality using Ember Views.
+    HTML
   }
+
 ].each do |example_hash| 
   Example.find_or_create_by(title: example_hash[:title]) do |example|
     example.level = example_hash[:level]

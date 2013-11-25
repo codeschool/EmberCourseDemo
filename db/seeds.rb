@@ -100,6 +100,11 @@ Example.delete_all
     HTML
   },
 
+  { title: "Ember Data Related Models ", level: 4, number: 20, description: <<-HTML.strip_heredoc
+      `hasMany` and `belongsTo` in Ember Data
+    HTML
+  },
+
   # 5-1: Ember Data Controller features
   { title: "Ember Controller Types ", level: 5, number: 10, description: <<-HTML.strip_heredoc
       Sorting by a property in a Controller.

@@ -1,0 +1,147 @@
+<script type="text/x-handlebars" data-template-name='application'>
+  {{ partial 'navigation' }}
+  <div class="container">
+    {{outlet}}
+    <hr>
+    {{ partial 'footer' }}
+  </div>
+</script>
+
+<%= render partial: 'templates/navigation2' %>
+<%= render partial: 'templates/footer' %>
+<%= render partial: 'templates/index' %>
+<%= render partial: 'templates/about' %>
+
+<script type="text/x-handlebars" data-template-name='products'>
+<h1>Products</h1>
+<ul>
+{{#each}}
+  <li>
+    <p>{{#link-to 'product' this classNames='btn btn-default'}}{{title}}{{/link-to}}</p>
+  </li>
+{{/each}}
+</ul>
+
+{{outlet}}
+</script>
+
+<script type="text/x-handlebars" data-template-name='products/index'>
+<p>Choose from our {{model}} products!</p>
+</script>
+
+
+<script type="text/x-handlebars" data-template-name='product'>
+<h1>{{title}}</h1>
+<p>{{description}}</p>
+<p>Buy for ${{price}}</p>
+
+<ul>
+{{#each reviews}}
+  <li>{{text}}</li>
+{{/each}}
+</ul>
+</script>
+
+<script type='text/javascript'>
+  var App = Ember.Application.create();
+  App.Router.map(function() {
+    this.route('about');
+    this.resource('products', function() {
+      this.resource('product', { path: '/:product_id'});
+    });
+  });
+
+  App.ProductsRoute = Ember.Route.extend({
+    model: function() {
+      return this.store.find('product');
+    }
+  });
+
+  App.ProductsIndexRoute = Ember.Route.extend({
+    model: function() {
+      return this.store.find('product').length;
+    }
+  });
+
+  App.ApplicationAdapter = DS.FixtureAdapter.extend();
+  var attr = DS.attr;
+  App.Product = DS.Model.extend({
+    title: DS.attr('string'),
+    price: DS.attr('number'),
+    description: DS.attr('string'),
+    isOnSale: DS.attr('boolean'),
+    isSeasonal: DS.attr('boolean'),
+    reviews: DS.hasMany('review', {async: true}),
+  });
+
+  App.Review = DS.Model.extend({
+    text: DS.attr('string'),
+    reviewedAt: DS.attr('date'),
+    product: DS.belongsTo('product')
+  });
+
+  App.Product.FIXTURES = [
+    {
+      id: 1,
+      title: 'Acorn',
+      price: '0.99',
+      description: 'These fell right out of the tree -- or were left unguarded.',
+      isOnSale: true,
+      isSeasonal: true,
+      reviews: [100,101]
+    },
+    {
+      id: 2,
+      title: 'Pinecone',
+      price: '2.49',
+      description: 'A seasonal treat fresh from the pines.',
+      isOnSale: false,
+      isSeasonal: true,
+      reviews: [102,103]
+    },
+    {
+      id: 3,
+      title: 'Blackberries',
+      price: '4.99',
+      description: 'Got a sweet tooth? They might be hard to get to, but worth the trouble!',
+      isOnSale: true,
+      isSeasonal: true,
+      reviews: [104]
+    },
+    {
+      id: 4,
+      title: 'Peanuts',
+      price: '1.99',
+      description: 'Worth digging for, or ripped from a squirrels nest.',
+      isOnSale: false,
+      isSeasonal: false,
+      reviews: []
+    },
+    {
+      id: 5,
+      title: 'Mushrooms',
+      price: '9.99',
+      description: 'Freshly grown due to recent rain!',
+      isOnSale: true,
+      isSeasonal: false,
+      reviews: []
+    },
+    {
+      id: 6,
+      title: 'Eggs',
+      price: '19.99',
+      description: 'A rare and dangerous treat to come across.',
+      isOnSale: true,
+      isSeasonal: false,
+      reviews: []
+    }
+  ]
+
+App.Review.FIXTURES = [
+  { id: 100, product: 1, text: "Very good!" },
+  { id: 101, product: 1, text: "Amazing!" },
+  { id: 102, product: 2, text: "Also Amazing!" },
+  { id: 103, product: 2, text: "Worth checking out." },
+  { id: 104, product: 3, text: "Not worth it." },
+]
+</script>

@@ -32,3 +32,8 @@
   list-style-type: none;
 }
 
+
+
+.navbar-default .navbar-nav > li > a {
+  cursor: pointer;
+}

@@ -31,7 +31,8 @@ App.IndexRoute = Ember.Route.extend({
 });
 App.IndexController = Ember.ArrayController.extend({
   onSale: function() {
-    return this.filterProperty('isOnSale', true).slice(0,3);
+    //return this.filterProperty('isOnSale', true).slice(0,3);
+    return this.filterBy('isOnSale').slice(0,3);
   }.property('@each.isOnSale'),
 
   // productCount: function() {
@@ -79,7 +80,7 @@ App.ProductsController = Ember.ArrayController.extend({
 
   // Challenges
   seasonal: function () {
-    return this.filterProperty('isSeasonal', true).get('length');
+    return this.filbe raiterProperty('isSeasonal', true).get('length');
   }.property('@each.isSeasonal'),
 });
 
@@ -97,6 +98,7 @@ App.ProductController = Ember.ObjectController.extend({
 App.NewReviewComponent = Ember.Component.extend({
   actions: {
     createReview: function() {
+      debugger
       this.sendAction('action', param1, param2);
     }
   }

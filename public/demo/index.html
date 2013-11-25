@@ -126,13 +126,8 @@
     {{#if product.isSeasonal }}<span class="label label-warning">{{#link-to 'products.seasonal'}}Seasonal{{/link-to}}</span>{{/if}}
   </div>
 
-<<<<<<< HEAD
   <p class="product-description">{{product.description}}</p>
   <p>{{#link-to 'product' product classNames='btn btn-success'}}Buy for ${{product.price}}{{/link-to}}</p>
-=======
-  <p>{{product.description}}</p>
-  <p>{{#link-to 'product' product classNames='btn btn-primary'}}Buy for {{money product.price}}{{/link-to}}</p>
->>>>>>> Level 5 and 6
 </div>
 </script>
 
@@ -143,26 +138,8 @@
   </ol>
 
   <h2>{{title}}</h2>
-<<<<<<< HEAD
-  <h3 class="text-success">&#36;{{price}}</h3>
+  <h3 class="text-success">{{money price}}</h3>
   <p class="text-muted">{{description}}</p>
-  {{#if hasRatings}}<p>Rating: {{rating}}</p>{{/if}}
-  <p><img {{bind-attr src="image"}} /></p>
-  {{#if isUnrated}}
-  <p>
-    Rate this Product!
-    <ul class="list-rating">
-      <li><button class='btn btn-primary' {{action 'addRating' this 1}}><span class="glyphicon glyphicon-star"></span></button></li>
-      <li><button class='btn btn-primary' {{action 'addRating' this 2}}><span class="glyphicon glyphicon-star"></span></button></li>
-      <li><button class='btn btn-primary' {{action 'addRating' this 3}}><span class="glyphicon glyphicon-star"></span></button></li>
-      <li><button class='btn btn-primary' {{action 'addRating' this 4}}><span class="glyphicon glyphicon-star"></span></button></li>
-      <li><button class='btn btn-primary' {{action 'addRating' this 5}}><span class="glyphicon glyphicon-star"></span></button></li>
-    </ul>
-  </p>
-  {{/if}}
-=======
-  <p>{{money price}}</p>
-  <p>{{description}}</p>
 
   {{render 'product/reviews' reviews}}
 
@@ -180,7 +157,6 @@
 <script type='text/x-handlebars' data-template-name="components/new-review">
 {{textarea contentBinding=review}}
 <button {{action 'createReview'}}>Review</button>
->>>>>>> Level 5 and 6
 </script>
 
 <script type="text/x-handlebars" data-template-name='contacts'>

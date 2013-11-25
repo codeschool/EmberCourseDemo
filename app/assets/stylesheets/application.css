@@ -28,4 +28,5 @@
 
 .navbar-inverse .navbar-nav > li > a {
   color: #c8e3bf;
+  cursor: pointer;
 }

@@ -64,7 +64,7 @@ App.ProductsSeasonalRoute = Ember.Route.extend({
 });
 App.ProductsSaleRoute = Ember.Route.extend({
   model: function () {
-    return this.modelFor('products').filterProperty('isOnSale', true);
+    return this.modelFor('products').filterBy('isOnSale');
   }
 });
 App.ProductsController = Ember.ArrayController.extend({
@@ -75,31 +75,24 @@ App.ProductsController = Ember.ArrayController.extend({
 
   // Slides
   onSale: function() {
-    return this.filterProperty('isOnSale', true).get('length');
+    return this.filterBy('isOnSale').get('length');
   }.property('@each.isOnSale'),
 
   // Challenges
   seasonal: function () {
-    return this.filbe raiterProperty('isSeasonal', true).get('length');
+    return this.filterBy('isSeasonal').get('length');
   }.property('@each.isSeasonal'),
 });
 
-App.ProductController = Ember.ObjectController.extend({
-  actions: {
-    createReview: function(reviewText) {
-      var product = this.get('model'),
-          review = this.store.createRecord('review', {review: reviewText})
-      product.get('reviews').addObject(review);
-    }
-  }
-});
-
-
-App.NewReviewComponent = Ember.Component.extend({
+App.ProductReviewsNewController = Ember.ObjectController.extend({
+  reviewText: '',
   actions: {
     createReview: function() {
       debugger
-      this.sendAction('action', param1, param2);
+      console.log('')
+      var product = this.get('model'),
+          review = this.store.createRecord('review', {review: reviewText})
+      product.get('reviews').addObject(review);
     }
   }
 });
@@ -135,8 +128,6 @@ Ember.Handlebars.registerBoundHelper('money', function(value) {
 
 App.ProductDetailComponent = Ember.Component.extend({
   classNameBindings: ['isOnSale'],
-
-
   isOnSale: function() {
     return this.get('product.isOnSale');
   }.property()

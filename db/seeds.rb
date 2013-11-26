@@ -1,33 +1,18 @@
 Example.delete_all
 
 [
-  # 1-1: Application
-  { title: "Create Ember Application", level: 1, number: 5, description: <<-HTML.strip_heredoc
-      Creating a new Ember application using `Ember.Application.create()`.
+  # 1-2: Splitting up Templates
+  { title: "Application template with no {{outtlet}}", level: 1, number: 10, description: <<-HTML.strip_heredoc
+      Creating an `application` layout, but not yet providing an outlet. 
     HTML
   },
-  { title: "The First View", level: 1, number: 10, description: <<-HTML.strip_heredoc
-      Setting up an initial template using `text/x-handlebars`.
+  { title: "The First View", level: 1, number: 20, description: <<-HTML.strip_heredoc
+      Setting up the `index` template.
     HTML
   },
-  # 1-2: Views
-  { title: "Data-template-name='application'", level: 1, number: 30, description: <<-HTML.strip_heredoc
-      Different ways of giving your view a name using `id` and `data-template-name`.
-    HTML
-  },
-  { title: "Rendering variables using Handlebars", level: 1, number: 35, description: <<-HTML.strip_heredoc
-      Using the `{{}}` syntax to render a variable.
-    HTML
-  },
-  { title: "Index Path", level: 1, number: 40, description: <<-HTML.strip_heredoc
-      Creating a new template and using `{{outlet}}`.
-    HTML
-  },
-  # 1-3: Routes
-  { title: "About Page", level: 1, number: 50, description: <<-HTML.strip_heredoc
-      Create a new About page using a `data-template-name` of `about`.
-
-      Adding a route to our new About page using `App.Router`.
+  # 1-3: About Page
+  { title: "About Page", level: 1, number: 30, description: <<-HTML.strip_heredoc
+      The About Page.
     HTML
   },
 
@@ -41,10 +26,6 @@ Example.delete_all
       Passing options to a `link-to` helper.
     HTML
   },
-  { title: "Alternate Routes", level: 2, number: 30, description: <<-HTML.strip_heredoc
-      Changing the `index` route and specifying a `path` for routes.
-    HTML
-  },
   # 2-2: Controllers
   { title: "Controller Basics", level: 2, number: 50, description: <<-HTML.strip_heredoc
       Providing data for a template.
@@ -52,8 +33,10 @@ Example.delete_all
   },
   { title: "Binding attributes and functions", level: 2, number: 60, description: <<-HTML.strip_heredoc
       Binding attributes using `{{bind-attr}}`.
-
-      Using functions as properties.
+    HTML
+  },
+  { title: "Function as a property", level: 2, number: 70, description: <<-HTML.strip_heredoc
+      Using functions as properties
     HTML
   },
 

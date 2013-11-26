@@ -13,20 +13,63 @@
  *= require_tree .
  */
 
- body { margin-top: 70px; }
-
-.navbar {
-  background-color: #567c3d;
+ .tagline {
+  margin-bottom: 20px;
 }
 
-.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover {
-  background-color: #336532;
-}
-.navbar-inverse .navbar-brand, .navbar .active a {
+.label a {
   color: #fff;
+  text-decoration: none;
 }
 
-.navbar-inverse .navbar-nav > li > a {
-  color: #c8e3bf;
+.product-detail.row {
+  margin: 1em 0;
+  border-bottom: 1px solid #eee;
+}
+.product-detail img {
+  max-height: 150px;
+  max-width: 150px;
+}
+.product-detail h2 {
+  margin-top: 0;
+  margin-bottom: 0px;
+}
+.product-description {
+  margin-top: 10px;
+}
+
+.list-rating {
+  margin: 0;
+  padding: 0;
+}
+.list-rating li {
+  display: inline;
+  list-style-type: none;
+}
+
+
+
+.navbar-default .navbar-nav > li {
   cursor: pointer;
+  background-color: #824d3d;
+  padding: 12px 12px;
+  margin-top: -7px;
+  color: #f0eee1;
+  font-weight: bold;
+}
+.navbar-default .navbar-nav > li a {
+  padding: 0;
+  color: #f0eee1;
+}
+.navbar-default .navbar-nav > li:hover {
+  background-color: #e87714;
+}
+.navbar-default .navbar-nav > li.active {
+  color: #fff;
+  background-color: #b65a31;
+}
+
+textarea { 
+  width: 100%;
+  margin-bottom: 10px;
 }

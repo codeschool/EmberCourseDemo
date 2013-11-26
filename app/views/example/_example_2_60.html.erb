@@ -1,16 +1,34 @@
-<script type="text/x-handlebars" data-template-name='application'>
-  {{ partial 'navigation' }}
+<script type="text/x-handlebars">
+  <div class="navbar navbar-default">
+    <div class="container">
+      {{#link-to "index" class="navbar-brand"}}<img src="/assets/logo.png" alt="logo" height="34" width="224">{{/link-to}}
+      <ul class="nav navbar-nav navbar-right">
+        {{#link-to 'index' tagName='li'}}Home{{/link-to}}
+        {{#link-to 'about' tagName='li'}}About{{/link-to}}
+      </ul>
+    </div>
+  </div>
+
   <div class="container">
     {{outlet}}
-    <hr>
-    {{ partial 'footer' }}
   </div>
+
+  <footer class='container'>
+    <hr />
+    <p class='pull-left'>&copy; 2013 The Flint &amp; Flame</p>
+    <p class='pull-right'><a href='#/credits'>Credits</a></p>
+  </footer>
 </script>
 
-<%= render partial: 'templates/navigation' %>
-<%= render partial: 'templates/footer' %>
-<%= render partial: 'templates/index3' %>
-<%= render partial: 'templates/about' %>
+<script type='text/x-handlebars' data-template-name='index'>
+  <h1>Welcome to The Flint & Flame!</h1>
+  <p>There are {{productsCount}} products</p>
+  <img {{bind-attr src='logo'}} alt='Logo' />
+</script>
+
+<script type='text/x-handlebars' data-template-name='about'>
+  <h1>About The Fire Spirits</h1>
+</script>
 
 <script type='text/javascript'>
   App = Ember.Application.create();
@@ -20,9 +38,6 @@
 
   App.IndexController = Ember.Controller.extend({
     logo: "/assets/logo.png",
-    productCount: 6,
-    time: function() {
-      return "The current time is " + (new Date()).toDateString()
-    }.property()
+    productCount: 6
   });
 </script>

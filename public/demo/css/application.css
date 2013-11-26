@@ -34,6 +34,23 @@
 
 
 
-.navbar-default .navbar-nav > li > a {
+.navbar-default .navbar-nav > li {
   cursor: pointer;
+  background-color: #824d3d;
+  padding: 12px 12px;
+  margin-top: -7px;
+  color: #f0eee1;
+  font-weight: bold;
+}
+.navbar-default .navbar-nav > li:hover {
+  background-color: #e87714;
+}
+.navbar-default .navbar-nav > li.active {
+  color: #fff;
+  background-color: #b65a31;
+}
+
+textarea { 
+  width: 100%;
+  margin-bottom: 10px;
 }

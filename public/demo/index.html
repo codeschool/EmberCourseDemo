@@ -19,9 +19,9 @@
     <div class="container">
       {{#link-to "index" class="navbar-brand"}}<img src="images/logo.png" alt="logo" height="34" width="224">{{/link-to}}
       <ul class="nav navbar-nav navbar-right">
-        {{#link-to "index" tagName="li"}}<a>Home</a>{{/link-to}}
-        {{#link-to "contacts" tagName="li"}}<a>About</a>{{/link-to}}
-        {{#link-to "products" tagName="li"}}<a>Store</a>{{/link-to}}
+        {{#link-to "index" tagName="li"}}Home{{/link-to}}
+        {{#link-to "contacts" tagName="li"}}About{{/link-to}}
+        {{#link-to "products" tagName="li"}}Store{{/link-to}}
       </ul>
     </div>
   </div>
@@ -137,26 +137,40 @@
     <li class="active">{{title}}</li>
   </ol>
 
-  <h2>{{title}}</h2>
-  <h3 class="text-success">{{money price}}</h3>
-  <p class="text-muted">{{description}}</p>
+  <div class='row'>
+    <div class='col-md-7'>
+      <h2>{{title}}</h2>
+      
+      <h3 class="text-success">{{money price}}</h3>
+      <p class="text-muted">{{description}}</p>
 
-  {{render 'product/reviews' reviews}}
+      {{render 'product/reviews' reviews}}
 
-  {{new-review product=product action="createReview"}}
+      {{render 'product/reviews/new' this }}
+    </div>
+    <div class='col-md-5'>
+      <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
+    </div>
+  </div>
 </script>
 
 <script type="text/x-handlebars" data-template-name='product/reviews'>
+<h3>Reviews</h3>
 <ul>
 {{#each}}
   <li><p>{{review}}</p></li>
+{{else}}
+  <li><p class='text-muted'><em>No reviews yet. Be the first to write one!</em></p></li>
 {{/each}}
 </ul>
 </script>
 
-<script type='text/x-handlebars' data-template-name="components/new-review">
-{{textarea contentBinding=review}}
-<button {{action 'createReview'}}>Review</button>
+<script type="text/x-handlebars" data-template-name='product/reviews/new'>
+{{#if reviewText}}
+  <p>{{reviewText}}</p>
+{{/if}}
+{{textarea valueBinding='reviewText'}}
+<button {{action 'createReview'}} class='btn-primary right'>Review</button>
 </script>
 
 <script type="text/x-handlebars" data-template-name='contacts'>

@@ -3,15 +3,14 @@
     <div class="container">
       {{#link-to "index" class="navbar-brand"}}<img src="/assets/logo.png" alt="logo" height="34" width="224">{{/link-to}}
       <ul class="nav navbar-nav navbar-right">
-        <li href='#' class='active'>Home</li>
-        <li href='#/about'>About</li>
-        <li href='#/store'>Store</li>
+        {{#link-to 'index' tagName='li'}}Home{{/link-to}}
+        {{#link-to 'about' tagName='li'}}About{{/link-to}}
       </ul>
     </div>
   </div>
 
   <div class="container">
-
+    {{outlet}}
   </div>
 
   <footer class='container'>
@@ -23,6 +22,9 @@
 
 <script type='text/x-handlebars' data-template-name='index'>
   <h1>Welcome to The Flint & Flame!</h1>
+  <p>There are {{productsCount}} products</p>
+  <img {{bind-attr src='logo'}} alt='Logo' />
+  <p>Rendered on {{time}}</p> 
 </script>
 
 <script type='text/x-handlebars' data-template-name='about'>
@@ -31,4 +33,15 @@
 
 <script type='text/javascript'>
   App = Ember.Application.create();
+  App.Router.map(function() {
+    this.route('about');
+  });
+
+  App.IndexController = Ember.Controller.extend({
+    logo: "/assets/logo.png",
+    productCount: 6,
+    time: function() {
+      return (new Date()).toDateString();
+    }.property()
+  });
 </script>

@@ -42,10 +42,13 @@ Example.delete_all
 
 
   # 3-1: Routing
-  { title: "Passing Data To a View", level: 3, number: 10, description: <<-HTML.strip_heredoc
-      Using a `Route` to pass data to a view.
+  { title: "Creating a route route and a new template", level: 3, number: 10, description: <<-HTML.strip_heredoc
+      New resource route with no model yet.
+    HTML
+  },
 
-      Using `each` to loop over data in handlebars. 
+  { title: "Adding data to a resource route", level: 3, number: 15, description: <<-HTML.strip_heredoc
+      Using the `model` method to provide data to a route.
     HTML
   },
 

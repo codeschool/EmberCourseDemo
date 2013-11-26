@@ -32,25 +32,8 @@
   <h1>About The Fire Spirits</h1>
 </script>
 
-<!--
-{{#each product in controller}}
-{{#each product in controller.model}}
-{{#each product in model}}
--->
 <script type="text/x-handlebars" data-template-name='products'>
 <h1>Products</h1>
-<ul class='list-unstyled col-md-8'>
-{{#each}}
-  <li class='row'>
-    <img {{bind-attr src='image'}} class='img-thumbnail col-md-5'/>
-    <div class='col-md-7'>
-      <h2>{{title}}</h2>
-      <p class="product-description">{{description}}</p>
-      <p><button class='btn btn-success'>Buy for ${{price}}</button></p>
-    </div>
-  </li>
-{{/each}}
-</ul>
 </script>
 
 <script type='text/javascript'>

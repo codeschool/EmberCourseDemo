@@ -38,34 +38,46 @@
 {{#each product in model}}
 -->
 <script type="text/x-handlebars" data-template-name='products'>
-<h1>Products</h1>
-<ul class='list-unstyled col-sm-10'>
-{{#each}}
-  <li class='row'>
-    <img {{bind-attr src='image'}} class='img-thumbnail col-sm-5'/>
-    <div class='col-sm-7'>
-      <h2>{{title}}</h2>
-      <p class="product-description">{{description}}</p>
-      <p>{{#link-to 'product' title class='btn btn-success'}}Buy for ${{price}}{{/link-to}}</p>
+<div class='row'>
+  <div class='col-sm-3'>
+    <div class="list-group">
+      {{#each}}
+        {{#link-to 'product' this classNames="list-group-item"}}
+          {{title}}
+        {{/link-to}}
+      {{/each}}
     </div>
-  </li>
-{{/each}}
-</ul>
+  </div>
+  <div class='col-sm-9'>
+    {{outlet}}
+  </div>
+</div>
 </script>
 
-
 <script type="text/x-handlebars" data-template-name='product'>
-  <h2>{{title}}</h2>
-  <p>{{description}}</p>
-  <p>Buy for ${{price}}</p>
+  <div class='row'>
+    <div class='col-sm-7'>
+      <h2>{{title}}</h2>
+      <h3 class="text-success">${{price}}</h3>
+      <p class="text-muted">{{description}}</p>
+    </div>
+    <div class='col-sm-5'>
+      <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
+    </div>
+  </div>
+</script>
+
+<script type='text/x-handlebars' data-template-name='products/index'>
+  <p class="text-muted">Choose a product from those on the left!</p>
 </script>
 
 <script type='text/javascript'>
   App = Ember.Application.create();
   App.Router.map(function() {
     this.route('about');
-    this.resource('products');
-    this.resource('product', { path: '/products/:title' });
+    this.resource('products', function() {
+      this.resource('product', { path: '/:title' });
+    });
   });
 
   App.IndexController = Ember.Controller.extend({

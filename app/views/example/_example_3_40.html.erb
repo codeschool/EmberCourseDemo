@@ -53,11 +53,17 @@
 </ul>
 </script>
 
-
 <script type="text/x-handlebars" data-template-name='product'>
-  <h2>{{title}}</h2>
-  <p>{{description}}</p>
-  <p>Buy for ${{price}}</p>
+  <div class='row'>
+    <div class='col-sm-7'>
+      <h2>{{title}}</h2>
+      <h3 class="text-success">${{price}}</h3>
+      <p class="text-muted">{{description}}</p>
+    </div>
+    <div class='col-sm-5'>
+      <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
+    </div>
+  </div>
 </script>
 
 <script type='text/javascript'>

@@ -47,7 +47,7 @@
   <div class="body-content">
     <div class="row">
       {{#each onSale}}
-        {{product-detail product=this classNames="col-md-4"}}
+        {{product-detail product=this classNames="col-sm-4"}}
       {{/each}}
     </div>
   </div>
@@ -56,7 +56,7 @@
 
 <script type="text/x-handlebars" data-template-name='products'>
 <div class='row'>
-  <div class='col-md-3'>
+  <div class='col-sm-3'>
     <div class="list-group">
       {{#each}}
         {{#link-to 'product' this classNames="list-group-item"}}
@@ -75,7 +75,7 @@
       {{/link-to}}
     </div>
   </div>
-  <div class='col-md-9'>
+  <div class='col-sm-9'>
     {{outlet}}
   </div>
 </div>
@@ -117,8 +117,8 @@
 </script>
 
 <script type="text/x-handlebars" data-template-name='components/product-detail'>
-<img {{bind-attr src='product.image'}} class='img-thumbnail col-md-5'/>
-<div class='col-md-7'>
+<img {{bind-attr src='product.image'}} class='img-thumbnail col-sm-5'/>
+<div class='col-sm-7'>
   <h2>{{product.title}}</h2>
 
   <div class="labels">
@@ -138,7 +138,7 @@
   </ol>
 
   <div class='row'>
-    <div class='col-md-7'>
+    <div class='col-sm-7'>
       <h2>{{title}}</h2>
       
       <h3 class="text-success">{{money price}}</h3>
@@ -148,7 +148,7 @@
 
       {{render 'product/reviews/new' this }}
     </div>
-    <div class='col-md-5'>
+    <div class='col-sm-5'>
       <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
     </div>
   </div>
@@ -175,7 +175,7 @@
 
 <script type="text/x-handlebars" data-template-name='contacts'>
   <div class='row'>
-  <div class='col-md-2'>
+  <div class='col-sm-2'>
     <div class="list-group">
       {{#each}}
         {{#link-to 'contact' this classNames="list-group-item"}}

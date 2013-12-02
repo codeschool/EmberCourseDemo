@@ -1,3 +1,4 @@
+
 <script type="text/x-handlebars">
   <div class="navbar navbar-default">
     <div class="container">
@@ -38,34 +39,56 @@
 {{#each product in model}}
 -->
 <script type="text/x-handlebars" data-template-name='products'>
-<h1>Products</h1>
-<ul class='list-unstyled col-sm-10'>
-{{#each}}
-  <li class='row'>
-    <img {{bind-attr src='image'}} class='img-thumbnail col-sm-5'/>
-    <div class='col-sm-7'>
-      <h2>{{title}}</h2>
-      <p class="product-description">{{description}}</p>
-      <p>{{#link-to 'product' title class='btn btn-success'}}Buy for ${{price}}{{/link-to}}</p>
+<div class='row'>
+  <div class='col-sm-3'>
+    <div class="list-group">
+      {{#each}}
+        {{#link-to 'product' this classNames="list-group-item"}}
+          {{title}}
+        {{/link-to}}
+      {{/each}}
     </div>
-  </li>
-{{/each}}
-</ul>
+  </div>
+  <div class='col-sm-9'>
+    {{outlet}}
+  </div>
+</div>
 </script>
 
-
 <script type="text/x-handlebars" data-template-name='product'>
-  <h2>{{title}}</h2>
-  <p>{{description}}</p>
-  <p>Buy for ${{price}}</p>
+  <div class='row'>
+    <div class='col-sm-7'>
+      <h2>{{title}}</h2>
+      <h3 class="text-success">${{price}}</h3>
+      <p class="text-muted">{{description}}</p>
+
+      <h3>Reviews</h3>
+      <ul>
+      {{#each reviews}}
+        <li><p>{{text}}</p></li>
+      {{else}}
+        <li><p class='text-muted'><em>No reviews yet. Be the first to write one!</em></p></li>
+      {{/each}}
+      </ul>
+
+    </div>
+    <div class='col-sm-5'>
+      <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
+    </div>
+  </div>
+</script>
+
+<script type='text/x-handlebars' data-template-name='products/index'>
+  <p class="text-muted">Choose a product from those on the left!</p>
 </script>
 
 <script type='text/javascript'>
   App = Ember.Application.create();
   App.Router.map(function() {
     this.route('about');
-    this.resource('products');
-    this.resource('product', { path: '/products/:title' });
+    this.resource('products', function() {
+      this.resource('product', { path: '/:product_id' });
+    });
   });
 
   App.IndexController = Ember.Controller.extend({
@@ -78,32 +101,51 @@
 
   App.ProductsRoute = Ember.Route.extend({
     model: function() {
-      return App.PRODUCTS;
+      return this.store.findAll('product');
     }
   });
 
-  App.ProductRoute = Ember.Route.extend({
-    model: function(params) {
-      return App.PRODUCTS.findBy('title', params.title);
-    }
+
+  App.ApplicationAdapter = DS.FixtureAdapter.extend();
+  var attr = DS.attr;
+  App.Product = DS.Model.extend({
+    title: DS.attr(),
+    price: DS.attr(),
+    description: DS.attr(),
+    isOnSale: DS.attr(),
+    image: DS.attr(),
+    reviews: DS.hasMany('review', {async: true}),
   });
 
-  App.PRODUCTS = [
+  App.Review = DS.Model.extend({
+    text: DS.attr('string'),
+    reviewedAt: DS.attr('date'),
+    product: DS.belongsTo('product')
+  });
+
+  App.Product.FIXTURES = [
     {
+      id: 1,
       title: 'Flint',
       price: 99,
       description: 'Flint is a hard, sedimentary cryptocrystalline form of the mineral quartz, categorized as a variety of chert.',
       isSeasonal: true,
-      image: '/assets/products/flint.png'
+      image: '/assets/products/flint.png',
+      reviews: [100,101]
     },
     {
+      id: 2,
       title: 'Kindling',
       price: 249,
       description: 'Easily combustible small sticks or twigs used for starting a fire.',
       isOnSale: false,
-      isSeasonal: true,
-      ratings: [102, 103],
-      image: '/assets/products/kindling.png'
+      image: '/assets/products/kindling.png',
+      reviews: []
     }
   ];
+
+  App.Review.FIXTURES = [
+    { id: 100, product: 1, text: "Started a fire in no time!" },
+    { id: 101, product: 1, text: "Not the brightest flame, but warm!" }
+  ]
 </script>

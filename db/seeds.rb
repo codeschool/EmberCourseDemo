@@ -46,35 +46,37 @@ Example.delete_all
       New resource route with no model yet.
     HTML
   },
-
   { title: "Adding data to a resource route", level: 3, number: 15, description: <<-HTML.strip_heredoc
       Using the `model` method to provide data to a route.
     HTML
   },
 
-  # 3-2: Related Routes
-  { title: "Related Routes", level: 3, number: 15, description: <<-HTML.strip_heredoc
-      Creating a `resource` route with a dynamic URL.
+  { title: "A Simple Loop", level: 3, number: 20, description: <<-HTML.strip_heredoc
+      Using `each` to loop over an array.
     HTML
   },
 
-  # 3-3: Nested Resource Routes
-  { title: "Resource Routes", level: 3, number: 20, description: <<-HTML.strip_heredoc
-      Difference between regular routes and resource routes.
+  # 3-2: Product Route
+  { title: "A Product Route", level: 3, number: 30, description: <<-HTML.strip_heredoc
+      Simple Product Route. Using a dynamic segment.
     HTML
   },
-  { title: "Using Outlet within nested routes", level: 3, number: 30, description: <<-HTML.strip_heredoc
-      Using `{{outlet}}` and introducting the `index` template.
+  { title: "Detailed Product", level: 3, number: 40, description: <<-HTML.strip_heredoc
+      A more elaborate `product` template and link in from the `products` template.
     HTML
   },
-  { title: "Index Resource Routes", level: 3, number: 25, description: <<-HTML.strip_heredoc
-      Using an `index` template within a resource.
+
+  # 3-3: Master Detail view
+  { title: "Master Detail", level: 3, number: 50, description: <<-HTML.strip_heredoc
+      Nested route with master detail.
     HTML
   },
-  { title: "Non-Nested Resources", level: 3, number: 40, description: <<-HTML.strip_heredoc
-      Related resources without nesting.
+  { title: "Nested Route with index template", level: 3, number: 60, description: <<-HTML.strip_heredoc
+      Using a nested index template
     HTML
   },
+
+  
 
   # 4-1: Ember Data
   { title: "Ember Data Basics ", level: 4, number: 10, description: <<-HTML.strip_heredoc
@@ -86,8 +88,21 @@ Example.delete_all
     HTML
   },
 
-  { title: "Ember Data Related Models ", level: 4, number: 20, description: <<-HTML.strip_heredoc
+  { title: "URL Refactor", level: 4, number: 20, description: <<-HTML.strip_heredoc
+      Refactoring URL to use product_id
+    HTML
+  },
+
+  { title: "Ember Data Related Models", level: 4, number: 30, description: <<-HTML.strip_heredoc
       `hasMany` and `belongsTo` in Ember Data
+    HTML
+  },
+  { title: "Using aync:true", level: 4, number: 40, description: <<-HTML.strip_heredoc
+      Using async true to load everything.
+    HTML
+  },
+  { title: "Hitting the server with Ember Data", level: 4, number: 50, description: <<-HTML.strip_heredoc
+      Changing to our REST adapter and hitting the server.
     HTML
   },
 

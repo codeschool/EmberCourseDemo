@@ -112,6 +112,13 @@ App.ContactsController = Ember.ArrayController.extend({
   sortProperties: ['name']
 });
 
+App.ContactsIndexController = Ember.Controller.extend({
+  open: function() {
+    debugger
+    return "Open Now";
+  }.property()
+});
+
 
 
 // Handlebars

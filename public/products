@@ -1,0 +1,25 @@
+{ "products": [
+    {
+      "id": 1,
+      "title": "Flint",
+      "price": 99,
+      "description": "Flint is a hard, sedimentary cryptocrystalline form of the mineral quartz, categorized as a variety of chert.",
+      "isOnSale": true,
+      "image": "/assets/products/flint.png",
+      "reviews": [100,101]
+    },
+    {
+      "id": 2,
+      "title": "Kindling",
+      "price": 249,
+      "description": "Easily combustible small sticks or twigs used for starting a fire.",
+      "isOnSale": false,
+      "image": "/assets/products/kindling.png",
+      "reviews": []
+    }
+  ],
+  "reviews": [
+    { "id": 100, "product": 1, "text": "Started a fire in no time!" },
+    { "id": 101, "product": 1, "text": "Not the brightest flame, but warm!" }
+  ]
+}

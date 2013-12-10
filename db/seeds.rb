@@ -107,6 +107,14 @@ Example.delete_all
   },
 
   # 5-1: Ember Data Controller features
+  { title: "Sorting in a router ", level: 5, number: 5, description: <<-HTML.strip_heredoc
+      How to pass attributes to a the server for sorting.
+    HTML
+  },
+  { title: "Wrong order for a controller ", level: 5, number: 7, description: <<-HTML.strip_heredoc
+      How to pass attributes to a the server for sorting.
+    HTML
+  },
   { title: "Ember Controller Types ", level: 5, number: 10, description: <<-HTML.strip_heredoc
       Sorting by a property in a Controller.
     HTML

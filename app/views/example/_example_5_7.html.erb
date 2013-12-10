@@ -22,13 +22,11 @@
   </footer>
 </script>
 
-
 <script type='text/x-handlebars' data-template-name='index'>
-  <div class="jumbotron">
-    <h1>Welcome to The Flint &amp; Flame!</h1>
-    <p class="tagline">Everything you need to make it through the winter.</p>
-    <p>{{#link-to 'products' class='btn btn-primary btn-lg'}}Browse All {{productCount}} Items &raquo;{{/link-to}}</p>
-  </div>
+  <h1>Welcome to The Flint & Flame!</h1>
+  <p>There are {{productsCount}} products</p>
+  <img {{bind-attr src='logo'}} alt='Logo' />
+  <p>Rendered on {{time}}</p> 
 </script>
 
 <script type='text/x-handlebars' data-template-name='about'>
@@ -93,12 +91,12 @@
     });
   });
 
-  App.IndexController = Ember.ArrayController.extend({
-    productsCount: function() {
-      return this.get('length');
-    }.property('length')
-
-    //productCount: Ember.computed.alias('length')
+  App.IndexController = Ember.Controller.extend({
+    logo: "/assets/logo.png",
+    productCount: 6,
+    time: function() {
+      return (new Date()).toDateString();
+    }.property()
   });
 
   App.ProductsRoute = Ember.Route.extend({
@@ -107,9 +105,6 @@
     }
   });
 
-  App.ProductsController = Ember.ArrayController.extend({
-    sortProperties: ['title']
-  });
 
   App.ApplicationAdapter = DS.FixtureAdapter.extend();
   var attr = DS.attr;

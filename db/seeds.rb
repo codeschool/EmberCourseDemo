@@ -136,16 +136,27 @@ Example.delete_all
     HTML
   },
 
-  # 6-1: Ember Components
+  # 6-1: The Template Forest
   { title: "Ember Components", level: 6, number: 10, description: <<-HTML.strip_heredoc
       Moving product details into a component.
     HTML
   },
+  { title: "Component Objects", level: 6, number: 15, description: <<-HTML.strip_heredoc
+      Using a Component Object.
+    HTML
+  },
   { title: "Ember Views", level: 6, number: 20, description: <<-HTML.strip_heredoc
-      Adding functionality using Ember Views.
+      Using an Ember view.
+    HTML
+  },
+  { title: "Partials", level: 6, number: 30, description: <<-HTML.strip_heredoc
+      Using a partial to abstract out content.
+    HTML
+  },
+  { title: "Sub controllers", level: 6, number: 40, description: <<-HTML.strip_heredoc
+      Using render with a controller.
     HTML
   }
-
 ].each do |example_hash| 
   Example.find_or_create_by(title: example_hash[:title]) do |example|
     example.level = example_hash[:level]

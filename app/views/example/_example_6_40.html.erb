@@ -47,9 +47,6 @@
       {{#if product.isOnSale }}<span class="label label-warning">{{#link-to 'products.onsale'}}On Sale{{/link-to}}</span>{{/if}}
     </div>
     <p class="product-description">{{product.description}}</p>
-    {{# if hasReviews }}
-      <p class='text-muted'>Read all reviews ({{reviewsCount}}).</p>
-    {{/if}}
     <p>{{#link-to 'product' product class='btn btn-success'}}Buy for ${{product.price}}{{/link-to}}</p>
   </div>
 </script>
@@ -64,6 +61,7 @@
 {{#each product in model}}
 -->
 <script type="text/x-handlebars" data-template-name='products'>
+<div class='row'>
   <div class='col-sm-3'>
     <div class="list-group">
       {{#each}}
@@ -76,27 +74,33 @@
   <div class='col-sm-9'>
     {{outlet}}
   </div>
+</div>
 </script>
 
 <script type="text/x-handlebars" data-template-name='product'>
-  <div class='col-sm-7'>
-    <h2>{{title}}</h2>
-    <h3 class="text-success">${{price}}</h3>
-    <p class="text-muted">{{description}}</p>
-
-    <h3>Reviews</h3>
-    <ul>
-    {{#each reviews}}
-      <li><p>{{text}}</p></li>
-    {{else}}
-      <li><p class='text-muted'><em>No reviews yet. Be the first to write one!</em></p></li>
-    {{/each}}
-    </ul>
-
+  <div class='row'>
+    <div class='col-sm-7'>
+      <h2>{{title}}</h2>
+      <h3 class="text-success">${{price}}</h3>
+      <p class="text-muted">{{description}}</p>
+      {{ render 'reviews' reviews }}
+    </div>
+    <div class='col-sm-5'>
+      <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
+    </div>
   </div>
-  <div class='col-sm-5'>
-    <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
-  </div>
+</script>
+
+
+<script type='text/x-handlebars' data-template-name='reviews'>
+  <h3>Reviews</h3>
+  <ul>
+  {{#each}}
+    <li><p>{{text}}</p></li>
+  {{else}}
+    <li><p class='text-muted'><em>No reviews yet. Be the first to write one!</em></p></li>
+  {{/each}}
+  </ul>
 </script>
 
 <script type='text/x-handlebars' data-template-name='products/index'>
@@ -130,6 +134,11 @@
     // }.property()
     }.property('@each.isOnSale')
   });
+  App.ReviewsController = Ember.ArrayController.extend({
+    sortProperties: ['reviewedAt'],
+    sortAscending: false
+  });
+
 
   App.IndexRoute = Ember.Route.extend({
     model: function() {
@@ -149,20 +158,6 @@
 
   App.ProductsController = Ember.ArrayController.extend({
     sortProperties: ['title']
-  });
-
-
-  App.ProductDetailComponent = Ember.Component.extend({
-    reviewsCount: Ember.computed.alias('product.reviews.length'),
-    hasReviews: function() {
-      return this.get('reviewsCount') > 0;
-    }.property('reviewsCount')
-  });
-
-  App.ProductView = Ember.View.extend({
-    classNames: ['row'],
-    classNameBindings: ['isOnSale'],
-    isOnSale: Ember.computed.alias('controller.isOnSale')
   });
 
   App.ApplicationAdapter = DS.FixtureAdapter.extend();
@@ -240,10 +235,10 @@
   ];
 
   App.Review.FIXTURES = [
-    { id: 100, product: 1, text: "Started a fire in no time!" },
-    { id: 101, product: 1, text: "Not the brightest flame, but warm!" },
-    { id: 102, product: 2, review: "A generious amount -- enough to make at least 3 fires!" },
-    { id: 103, product: 3, review: "If you have a dry place to keep these, they're a lifesaver." },
-    { id: 104, product: 4, review: "I don't even have arms, how would I operate this?" }
+    { id: 100, product: 1, text: "Started a fire in no time!", reviewedAt: new Date('12/01/2013') },
+    { id: 101, product: 1, text: "Not the brightest flame, but warm!", reviewedAt: new Date('12/05/2013') },
+    { id: 102, product: 2, review: "A generious amount -- enough to make at least 3 fires!", reviewedAt: new Date('12/08/2013') },
+    { id: 103, product: 3, review: "If you have a dry place to keep these, they're a lifesaver.", reviewedAt: new Date('12/10/2013') },
+    { id: 104, product: 4, review: "I don't even have arms, how would I operate this?", reviewedAt: new Date('12/12/2013') }
   ]
 </script>

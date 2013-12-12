@@ -47,9 +47,6 @@
       {{#if product.isOnSale }}<span class="label label-warning">{{#link-to 'products.onsale'}}On Sale{{/link-to}}</span>{{/if}}
     </div>
     <p class="product-description">{{product.description}}</p>
-    {{# if hasReviews }}
-      <p class='text-muted'>Read all reviews ({{reviewsCount}}).</p>
-    {{/if}}
     <p>{{#link-to 'product' product class='btn btn-success'}}Buy for ${{product.price}}{{/link-to}}</p>
   </div>
 </script>
@@ -64,6 +61,7 @@
 {{#each product in model}}
 -->
 <script type="text/x-handlebars" data-template-name='products'>
+<div class='row'>
   <div class='col-sm-3'>
     <div class="list-group">
       {{#each}}
@@ -76,27 +74,32 @@
   <div class='col-sm-9'>
     {{outlet}}
   </div>
+</div>
 </script>
 
 <script type="text/x-handlebars" data-template-name='product'>
-  <div class='col-sm-7'>
-    <h2>{{title}}</h2>
-    <h3 class="text-success">${{price}}</h3>
-    <p class="text-muted">{{description}}</p>
-
-    <h3>Reviews</h3>
-    <ul>
-    {{#each reviews}}
-      <li><p>{{text}}</p></li>
-    {{else}}
-      <li><p class='text-muted'><em>No reviews yet. Be the first to write one!</em></p></li>
-    {{/each}}
-    </ul>
-
+  <div class='row'>
+    <div class='col-sm-7'>
+      <h2>{{title}}</h2>
+      <h3 class="text-success">${{price}}</h3>
+      <p class="text-muted">{{description}}</p>
+      {{ partial 'reviews' }}
+    </div>
+    <div class='col-sm-5'>
+      <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
+    </div>
   </div>
-  <div class='col-sm-5'>
-    <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
-  </div>
+</script>
+
+<script type='text/x-handlebars' data-template-name='_reviews'>
+  <h3>Reviews</h3>
+  <ul>
+  {{#each reviews}}
+    <li><p>{{text}}</p></li>
+  {{else}}
+    <li><p class='text-muted'><em>No reviews yet. Be the first to write one!</em></p></li>
+  {{/each}}
+  </ul>
 </script>
 
 <script type='text/x-handlebars' data-template-name='products/index'>
@@ -149,20 +152,6 @@
 
   App.ProductsController = Ember.ArrayController.extend({
     sortProperties: ['title']
-  });
-
-
-  App.ProductDetailComponent = Ember.Component.extend({
-    reviewsCount: Ember.computed.alias('product.reviews.length'),
-    hasReviews: function() {
-      return this.get('reviewsCount') > 0;
-    }.property('reviewsCount')
-  });
-
-  App.ProductView = Ember.View.extend({
-    classNames: ['row'],
-    classNameBindings: ['isOnSale'],
-    isOnSale: Ember.computed.alias('controller.isOnSale')
   });
 
   App.ApplicationAdapter = DS.FixtureAdapter.extend();

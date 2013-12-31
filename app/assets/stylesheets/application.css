@@ -77,3 +77,50 @@ textarea {
 h2 {
   margin-top: 5px;
 }
+
+.reviews {
+  padding: 0;
+}
+.reviews li {
+  padding: 4px;
+  border-bottom: 1px solid rgba(130, 98, 88, 0.40);
+}
+.reviews li:last-of-type {
+  border: none;
+}
+.reviews li.read-more {
+  position: relative;
+  cursor: pointer;
+  padding-bottom: 30px;
+}
+.reviews li .content { 
+  margin-top: 10px;
+}
+.reviews li.read-more .content { 
+  height: 40px;
+  overflow: hidden;
+}
+.reviews li.read-more .expand {
+  width:100%;
+  position: absolute; 
+  bottom: 0px;
+  height: 25px;
+  text-align: center;
+}
+.reviews li.read-more:not(.is-expanded) .expand {
+  height: 75px;
+  padding-top: 50px;
+  background: -webkit-linear-gradient(rgba(240, 238, 225, 0),rgba(240, 238, 225, 1)); 
+  background-image: -moz-linear-gradient(rgba(240, 238, 225, 0),rgba(240, 238, 225, 1));
+  background-image: -o-linear-gradient(rgba(240, 238, 225, 0),rgba(240, 238, 225, 1));
+  background-image: linear-gradient(rgba(240, 238, 225, 0),rgba(240, 238, 225, 1));
+  background-image: -ms-linear-gradient(rgba(240, 238, 225, 0),rgba(240, 238, 225, 1));
+}
+
+.reviews li.read-more.is-expanded .content {
+  height: auto;
+}
+
+.reviews li.read-more span.label {
+  display: absolute;
+}

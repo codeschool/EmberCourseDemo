@@ -1,0 +1,277 @@
+
+<script type="text/x-handlebars">
+  <div class="navbar navbar-default">
+    <div class="container">
+      {{#link-to "index" class="navbar-brand"}}<img src="/assets/logo.png" alt="logo" height="34" width="224">{{/link-to}}
+      <ul class="nav navbar-nav navbar-right">
+        {{#link-to 'index' tagName='li'}}Home{{/link-to}}
+        {{#link-to 'about' tagName='li'}}About{{/link-to}}
+        {{#link-to 'products' tagName='li'}}Products{{/link-to}}
+      </ul>
+    </div>
+  </div>
+
+  <div class="container">
+    {{outlet}}
+  </div>
+
+  <footer class='container'>
+    <hr />
+    <p class='pull-left'>&copy; 2013 The Flint &amp; Flame</p>
+    <p class='pull-right'><a href='#/credits'>Credits</a></p>
+  </footer>
+</script>
+
+
+<script type='text/x-handlebars' data-template-name='index'>
+  <div class="jumbotron">
+    <h1>Welcome to The Flint &amp; Flame!</h1>
+    <p class="tagline">Everything you need to make it through the winter.</p>
+    <p>{{#link-to 'products' class='btn btn-primary btn-lg'}}Browse All {{productCount}} Items &raquo;{{/link-to}}</p>
+  </div>
+
+  <div class="body-content">
+    <div class="row">
+      {{#each onSale}}
+        {{product-detail product=this class='col-sm-4'}}
+      {{/each}}
+    </div>
+  </div>
+</script>
+
+<script type='text/x-handlebars' data-template-name='components/product-detail'>
+  <img {{bind-attr src='product.image'}} class='img-thumbnail col-sm-5'/>
+  <div class='col-sm-7'>
+    <h2>{{product.title}}</h2>
+    <div class="labels">
+      {{#if product.isOnSale }}<span class="label label-warning">{{#link-to 'products.onsale'}}On Sale{{/link-to}}</span>{{/if}}
+    </div>
+    <p class="product-description">{{product.description}}</p>
+    <p>{{#link-to 'product' product class='btn btn-success'}}Buy for ${{product.price}}{{/link-to}}</p>
+  </div>
+</script>
+
+<script type='text/x-handlebars' data-template-name='about'>
+  <h1>About The Fire Spirits</h1>
+</script>
+
+<!--
+{{#each product in controller}}
+{{#each product in controller.model}}
+{{#each product in model}}
+-->
+<script type="text/x-handlebars" data-template-name='products'>
+<div class='row'>
+  <div class='col-sm-3'>
+    <div class="list-group">
+      {{#each}}
+        {{#link-to 'product' this classNames="list-group-item"}}
+          {{title}}
+        {{/link-to}}
+      {{/each}}
+    </div>
+  </div>
+  <div class='col-sm-9'>
+    {{outlet}}
+  </div>
+</div>
+</script>
+
+<script type="text/x-handlebars" data-template-name='product'>
+  <div class='row'>
+    <div class='col-sm-7'>
+      <h2>{{title}}</h2>
+      <h3 class="text-success">${{price}}</h3>
+      <p class="text-muted">{{description}}</p>
+      {{ render 'reviews' reviews }}
+      <div class='new-review'>
+        <h3>Review {{title}}</h3>
+        {{#if isNew}}
+          <p class='text-muted'>{{review.text}}</p>
+        {{/if}}
+        {{textarea valueBinding='review.text'}}
+
+        {{#if isNew }}
+          <button {{action 'createReview'}} class='btn-primary'>Review</button>
+        {{else}}
+          {{#if isEditing }}
+            <button {{action 'createReview'}} class='btn-primary'>Update</button>
+          {{/if}}
+        {{/if}}
+        </button>
+      </div>
+    </div>
+    <div class='col-sm-5'>
+      <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
+    </div>
+  </div>
+</script>
+
+
+<script type='text/x-handlebars' data-template-name='reviews'>
+  <h3>Reviews</h3>
+  <ul>
+  {{#each}}
+    <li><p>{{text}}</p></li>
+  {{else}}
+    <li><p class='text-muted'><em>No reviews yet. Be the first to write one!</em></p></li>
+  {{/each}}
+  </ul>
+</script>
+
+<script type='text/x-handlebars' data-template-name='products/index'>
+  <p class="text-muted">Choose a product from those on the left!</p>
+</script>
+
+<script type="text/x-handlebars" data-template-name="products/onsale">
+<h2>On Sale Products</h2>
+<ul class='list-unstyled'>
+  {{#each}}
+    {{product-detail product=this class='row' tag='li'}}
+  {{/each}}
+</ul>
+</script>
+
+<script type='text/javascript'>
+  App = Ember.Application.create();
+  App.Router.map(function() {
+    this.route('about');
+    this.resource('products', function() {
+      this.resource('product', { path: '/:product_id' });
+      this.route('onsale');
+    });
+  });
+
+  App.IndexController = Ember.ArrayController.extend({
+    productCount: Ember.computed.alias('length'),
+
+    onSale: function() {
+      return this.filterBy('isOnSale').slice(0,3);
+    }.property('@each.isOnSale')
+  });
+  App.ReviewsController = Ember.ArrayController.extend({
+    sortProperties: ['reviewedAt'],
+    sortAscending: false
+  });
+
+
+  App.IndexRoute = Ember.Route.extend({
+    model: function() {
+      return this.store.findAll('product');
+    }
+  });
+  App.ProductsRoute = Ember.Route.extend({
+    model: function() {
+      return this.store.findAll('product');
+    }
+  });
+  App.ProductsOnsaleRoute = Ember.Route.extend({
+    model: function () {
+      return this.modelFor('products').filterBy('isOnSale');
+    }
+  });
+
+  App.ProductsController = Ember.ArrayController.extend({
+    sortProperties: ['title']
+  });
+  App.ProductController = Ember.ObjectController.extend({
+    isEditing: Ember.computed.alias('review.isDirty'),
+    isNew: Ember.computed.alias('review.isNew'),
+    review: function() {
+      return this.store.createRecord('review', {
+        product: this.get('model')
+      });
+    }.property('model'),
+    actions: {
+      createReview: function() {
+        var controller = this;
+        this.get('review').set('reviewedAt', new Date());
+        this.get('review').save().then(function(review) {
+          controller.get('model.reviews').addObject(review);
+        });
+      }
+    }
+  });
+
+  App.ApplicationAdapter = DS.FixtureAdapter.extend();
+  var attr = DS.attr;
+  App.Product = DS.Model.extend({
+    title: DS.attr(),
+    price: DS.attr(),
+    description: DS.attr(),
+    isOnSale: DS.attr(),
+    image: DS.attr(),
+    reviews: DS.hasMany('review', {async: true}),
+  });
+
+  App.Review = DS.Model.extend({
+    text: DS.attr('string'),
+    reviewedAt: DS.attr('date'),
+    product: DS.belongsTo('product', {async: true})
+  });
+
+  App.Product.FIXTURES = [
+    {
+      id: 1,
+      title: 'Flint',
+      price: 99,
+      description: 'Flint is a hard, sedimentary cryptocrystalline form of the mineral quartz, categorized as a variety of chert.',
+      isOnSale: true,
+      image: '/assets/products/flint.png',
+      reviews: [100,101]
+    },
+    {
+      id: 2,
+      title: 'Kindling',
+      price: 249,
+      description: 'Easily combustible small sticks or twigs used for starting a fire.',
+      isOnSale: false,
+      image: '/assets/products/kindling.png',
+      reviews: [102]
+    },
+    {
+      id: 3,
+      title: 'Matches',
+      price: 499,
+      description: 'One end is coated with a material that can be ignited by frictional heat generated by striking the match against a suitable surface.',
+      isOnSale: true,
+      reviews: [103],
+      image: '/assets/products/matches.png'
+    },
+    {
+      id: 4,
+      title: 'Bow Drill',
+      price: 999,
+      description: 'The bow drill is an ancient tool. While it was usually used to make fire, it was also used for primitive woodworking and dentistry.',
+      isOnSale: false,
+      reviews: [104],
+      image: '/assets/products/bow-drill.png'
+    },
+    {
+      id: 5,
+      title: 'Tinder',
+      price: 499,
+      description: 'Tinder is easily combustible material used to ignite fires by rudimentary methods.',
+      isOnSale: true,
+      reviews: [],
+      image: '/assets/products/tinder.png'
+    },
+    {
+      id: 6,
+      title: 'Birch Bark Shaving',
+      price: 999,
+      description: 'Fresh and easily combustable',
+      isOnSale: true,
+      reviews: [],
+      image: '/assets/products/birch.png'
+    }
+  ];
+
+  App.Review.FIXTURES = [
+    { id: 100, product: 1, text: "Started a fire in no time!", reviewedAt: new Date('12/01/2013').getTime()  },
+    { id: 101, product: 1, text: "Not the brightest flame, but warm!", reviewedAt: new Date('12/05/2013').getTime()  },
+    { id: 102, product: 2, text: "A generious amount -- enough to make at least 3 fires!", reviewedAt: new Date('12/08/2013').getTime()  },
+    { id: 103, product: 3, text: "If you have a dry place to keep these, they're a lifesaver.", reviewedAt: new Date('12/10/2013').getTime()  },
+    { id: 104, product: 4, text: "I don't even have arms, how would I operate this?", reviewedAt: new Date('12/12/2013').getTime()  }
+  ]
+</script>

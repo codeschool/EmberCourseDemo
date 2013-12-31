@@ -19,7 +19,7 @@
     }
   ],
   "reviews": [
-    { "id": 100, "product": 1, "text": "Started a fire in no time!" },
-    { "id": 101, "product": 1, "text": "Not the brightest flame, but warm!" }
+    { "id": 100, "product": 1, "text": "Started a fire in no time!", "reviewedAt": "2013-12-10 08:00:00" },
+    { "id": 101, "product": 1, "text": "Not the brightest flame, but warm!", "reviewedAt": "2013-12-12 08:00:00" }
   ]
 }

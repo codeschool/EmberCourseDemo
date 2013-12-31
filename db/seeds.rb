@@ -156,6 +156,36 @@ Example.delete_all
   { title: "Sub controllers", level: 6, number: 40, description: <<-HTML.strip_heredoc
       Using render with a controller.
     HTML
+  },
+
+  # 7-1: Review Preview
+  { title: "Showing the preview", level: 7, number: 5, description: <<-HTML.strip_heredoc
+      Binding to show a preview of a review.
+    HTML
+  },
+  { title: "Adding an Action", level: 7, number: 10, description: <<-HTML.strip_heredoc
+      Adding an action back to the controller.
+    HTML
+  },
+  { title: "Save with RESTAdapter", level: 7, number: 15, description: <<-HTML.strip_heredoc
+      Using `save()` with the REST adapter
+    HTML
+  },
+
+  # 7-2: Splitting out with {{render}}
+  { title: "Controller shared state", level: 7, number: 20, description: <<-HTML.strip_heredoc
+      Using a new model.
+    HTML
+  },
+  { title: "Hiding the form", level: 7, number: 30, description: <<-HTML.strip_heredoc
+      Hiding the form after writing a review.
+    HTML
+  },
+
+  # 7-3: Shorting the review
+  { title: "Shortening the Review", level: 7, number: 40, description: <<-HTML.strip_heredoc
+      Shortening the review with a "read more..." link.
+    HTML
   }
 ].each do |example_hash| 
   Example.find_or_create_by(title: example_hash[:title]) do |example|

@@ -12,7 +12,8 @@
 //
 //= require jquery
 //= require bootstrap
-//= require handlebars-1.0.0
-//= require ember-1.0.0
+//= require handlebars
+//= require markdown
+//= require ember
 //= require ember-data
 //= require_tree .

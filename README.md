@@ -23,15 +23,15 @@ $ gem install bundler
 Next, download or clone this repository, change directory into it, and `bundle`.
 
 ```
-$ git clone git@github.com/codeschool/EmberDemo.git
-$ cd EmberDemo
-EmberDemo $ bundle install
+$ git clone https://github.com/codeschool/EmberCourseDemo.git
+$ cd EmberCourseDemo
+EmberCourseDemo $ bundle install
 ```
 
 Next, setup the database -- which contains information on the code samples used in the course.
 
 ```
-EmberDemo $ bundle exec rake db:setup
+EmberCourseDemo $ bundle exec rake db:setup
 ```
 
 ## Running
@@ -39,7 +39,7 @@ EmberDemo $ bundle exec rake db:setup
 After that, you should be all set to run the application:
 
 ```
-EmberDemo $ bundle exec rails s
+EmberCourseDemo $ bundle exec rails s
 ```
 
-This will start the application on port 3000. Open up [http://localhost:3000](http://localhost:3000/examples) in a browser and head to any code sample.
+This will start the application on port 3000. Open up [http://localhost:3000/examples](http://localhost:3000/examples) in a browser and head to any code sample.

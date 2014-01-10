@@ -42,4 +42,4 @@ After that, you should be all set to run the application:
 EmberCourseDemo $ bundle exec rails s
 ```
 
-This will start the application on port 3000. Open up [http://localhost:3000](http://localhost:3000/examples) in a browser and head to any code sample.
+This will start the application on port 3000. Open up [http://localhost:3000/examples](http://localhost:3000/examples) in a browser and head to any code sample.
